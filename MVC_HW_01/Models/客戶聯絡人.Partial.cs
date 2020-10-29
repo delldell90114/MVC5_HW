@@ -26,13 +26,14 @@ namespace MVC_HW_01.Models
         
         [StringLength(250, ErrorMessage="欄位長度不得大於 250 個字元")]
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
+        [PhoneFormat]
         public string 手機 { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
-        [PhoneFormat]
         public string 電話 { get; set; }
         [Required]
         public bool is_delete { get; set; }

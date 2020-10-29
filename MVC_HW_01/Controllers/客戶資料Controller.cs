@@ -15,14 +15,10 @@ namespace MVC_HW_01.Controllers
     {
         //private CustomerInformationEntities db = new CustomerInformationEntities();
         private 客戶資料Repository 客戶資料repo;
-        private 客戶聯絡人Repository 客戶聯絡人repo;
-        private 客戶銀行資訊Repository 客戶銀行資訊repo;
 
         public 客戶資料Controller()
         {
             客戶資料repo = RepositoryHelper.Get客戶資料Repository();
-            客戶聯絡人repo = RepositoryHelper.Get客戶聯絡人Repository();
-            客戶銀行資訊repo = RepositoryHelper.Get客戶銀行資訊Repository();
         }
 
         // GET: 客戶資料
