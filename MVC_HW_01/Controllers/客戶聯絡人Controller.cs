@@ -63,7 +63,7 @@ namespace MVC_HW_01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(客戶聯絡人 客戶聯絡人)
         {
-            if (ModelState.IsValid && !客戶聯絡人repo.IsEmailDuplicated(客戶聯絡人.Email))
+            if (ModelState.IsValid && !客戶聯絡人repo.IsEmailDuplicated(客戶聯絡人.Id, 客戶聯絡人.Email))
             {
                 //db.客戶聯絡人.Add(客戶聯絡人);
                 //db.SaveChanges();                
@@ -102,7 +102,7 @@ namespace MVC_HW_01.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(客戶聯絡人 客戶聯絡人)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !客戶聯絡人repo.IsEmailDuplicated(客戶聯絡人.Id, 客戶聯絡人.Email))
             {
                 //db.Entry(客戶聯絡人).State = System.Data.Entity.EntityState.Modified;
                 //db.SaveChanges();
@@ -111,6 +111,7 @@ namespace MVC_HW_01.Controllers
                 客戶聯絡人repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
+            ModelState.AddModelError("Email", "請勿輸入重複的Email信箱！");
             //ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             ViewBag.客戶Id = new SelectList(客戶資料repo.All(), "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);

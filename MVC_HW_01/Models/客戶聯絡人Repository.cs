@@ -22,9 +22,9 @@ namespace MVC_HW_01.Models
             entity.is_delete = true;
         }
 
-        public bool IsEmailDuplicated(string email)
+        public bool IsEmailDuplicated(int id, string email)
         {
-            if (base.All().Where(p => p.Email == email).Count() == 0)
+            if (base.All().Where(p => p.Id != id && p.Email == email).Count() == 0)
             {
                 return false;
             }
