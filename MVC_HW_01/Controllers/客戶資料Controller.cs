@@ -15,10 +15,18 @@ namespace MVC_HW_01.Controllers
     {
         //private CustomerInformationEntities db = new CustomerInformationEntities();
         private 客戶資料Repository 客戶資料repo;
+        public List<SelectListItem> listItems;
 
         public 客戶資料Controller()
         {
             客戶資料repo = RepositoryHelper.Get客戶資料Repository();
+            listItems = 客戶資料repo.GetListItem();
+            ViewBag.分類名稱 = listItems;
+        }
+
+        public ActionResult ItemSelected(string list客戶分類)
+        {
+            return View();
         }
 
         // GET: 客戶資料
@@ -27,9 +35,37 @@ namespace MVC_HW_01.Controllers
         //    //return View(db.客戶資料.ToList());
         //    return View(客戶資料repo.All());
         //}
-        
-        public ActionResult Index(string sortOrder, string searchString)
-        {           
+        //private void SetViewBag客戶分類(eMovieCategories selectedMovie)
+        //{
+
+        //    IEnumerable<eMovieCategories> values =
+
+        //                      Enum.GetValues(typeof(eMovieCategories))
+
+        //                      .Cast<eMovieCategories>();
+
+        //    IEnumerable<SelectListItem> items =
+
+        //        from value in values
+
+        //        select new SelectListItem
+
+        //        {
+
+        //            Text = value.ToString(),
+
+        //            Value = value.ToString(),
+
+        //            Selected = value == selectedMovie,
+
+        //        };
+
+        //    ViewBag.MovieType = items;
+
+        //}
+                
+        public ActionResult Index(string sortOrder, string 分類名稱)
+        {
             ViewBag.CustomerNameSort = String.IsNullOrEmpty(sortOrder) || sortOrder == "CustomerNameSort" ? "CustomerNameDesc" : "CustomerNameSort";
             ViewBag.CustomerClassifySort = sortOrder == "CustomerClassifySort" ? "CustomerClassifyDesc" : "CustomerClassifySort";
             ViewBag.InvoiceSort = sortOrder == "InvoiceSort" ? "InvoiceDesc" : "InvoiceSort";
@@ -38,7 +74,7 @@ namespace MVC_HW_01.Controllers
             ViewBag.AddressSort = sortOrder == "AddressSort" ? "AddressDesc" : "AddressSort";
             ViewBag.EmailSort = sortOrder == "EmailSort" ? "EmailDesc" : "EmailSort";   
 
-            return View(客戶資料repo.OrderByCustomize(sortOrder));
+            return View(客戶資料repo.QueryByCustomize(sortOrder, 分類名稱));
         }
 
         // GET: 客戶資料/Details/5

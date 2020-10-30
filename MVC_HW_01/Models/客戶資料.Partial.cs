@@ -2,8 +2,10 @@ namespace MVC_HW_01.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.Web.Mvc;
+
     [MetadataType(typeof(客戶資料MetaData))]
     public partial class 客戶資料
     {
@@ -41,7 +43,7 @@ namespace MVC_HW_01.Models
         public string Email { get; set; }
         [Required]
         public bool is_delete { get; set; }
-    
+
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual ICollection<客戶聯絡人> 客戶聯絡人 { get; set; }
     }

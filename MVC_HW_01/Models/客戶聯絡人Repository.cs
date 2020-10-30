@@ -47,7 +47,7 @@ namespace MVC_HW_01.Models
                 data = this.All().Where(p => p.職稱 == title);
 
             }
-            IOrderedQueryable<客戶聯絡人> result = base.All().OrderBy(s => s.客戶Id);
+            IOrderedQueryable<客戶聯絡人> result = this.All().OrderBy(s => s.客戶Id);
             switch (sortOrder)
             {
                 case "TitleSort":
