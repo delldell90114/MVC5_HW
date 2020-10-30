@@ -22,10 +22,23 @@ namespace MVC_HW_01.Controllers
         }
 
         // GET: 客戶資料
-        public ActionResult Index()
-        {
-            //return View(db.客戶資料.ToList());
-            return View(客戶資料repo.All());
+        //public ActionResult Index()
+        //{
+        //    //return View(db.客戶資料.ToList());
+        //    return View(客戶資料repo.All());
+        //}
+        
+        public ActionResult Index(string sortOrder, string searchString)
+        {           
+            ViewBag.CustomerNameSort = String.IsNullOrEmpty(sortOrder) || sortOrder == "CustomerNameSort" ? "CustomerNameDesc" : "CustomerNameSort";
+            ViewBag.CustomerClassifySort = sortOrder == "CustomerClassifySort" ? "CustomerClassifyDesc" : "CustomerClassifySort";
+            ViewBag.InvoiceSort = sortOrder == "InvoiceSort" ? "InvoiceDesc" : "InvoiceSort";
+            ViewBag.PhoneSort = sortOrder == "PhoneSort" ? "PhoneDesc" : "PhoneSort";
+            ViewBag.FaxSort = sortOrder == "FaxSort" ? "FaxDesc" : "FaxSort";
+            ViewBag.AddressSort = sortOrder == "AddressSort" ? "AddressDesc" : "AddressSort";
+            ViewBag.EmailSort = sortOrder == "EmailSort" ? "EmailDesc" : "EmailSort";   
+
+            return View(客戶資料repo.OrderByCustomize(sortOrder));
         }
 
         // GET: 客戶資料/Details/5

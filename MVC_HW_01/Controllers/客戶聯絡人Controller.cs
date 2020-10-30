@@ -25,11 +25,22 @@ namespace MVC_HW_01.Controllers
         }
 
         // GET: 客戶聯絡人
-        public ActionResult Index()
-        {
-            //var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            //return View(客戶聯絡人.ToList());
-            return View(客戶聯絡人repo.All());
+        //public ActionResult Index()
+        //{
+        //    //var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
+        //    //return View(客戶聯絡人.ToList());
+        //    return View(客戶聯絡人repo.All());
+        //}
+        public ActionResult Index(string sortOrder, string searchString)
+        {            
+            ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) || sortOrder == "TitleSort" ? "TitleDesc" : "TitleSort";
+            ViewBag.NameSort = sortOrder == "NameSort" ? "NameDesc" : "NameSort";
+            ViewBag.EmailSort = sortOrder == "EmailSort" ? "EmailDesc" : "EmailSort";
+            ViewBag.CellphoneSort = sortOrder == "CellphoneSort" ? "CellphoneDesc" : "CellphoneSort";
+            ViewBag.PhoneSort = sortOrder == "PhoneSort" ? "PhoneDesc" : "PhoneSort";
+            ViewBag.CustomerNameSort = sortOrder == "CustomerNameSort" ? "CustomerNameDesc" : "CustomerNameSort";
+
+            return View(客戶聯絡人repo.QueryByCustomize(sortOrder, searchString));           
         }
 
         // GET: 客戶聯絡人/Details/5
